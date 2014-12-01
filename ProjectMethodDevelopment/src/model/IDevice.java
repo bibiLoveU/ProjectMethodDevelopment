@@ -1,6 +1,8 @@
-package control;
+package model;
 
 import java.awt.event.MouseEvent;
+
+import control.CandyCrushMain;
 
 public interface IDevice {
 

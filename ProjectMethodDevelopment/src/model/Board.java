@@ -2,7 +2,7 @@ package model;
 
 import java.util.HashMap;
 
-public class BasicBoard implements IBoard {
+public class Board implements IBoard {
 	
 	Integer length;
 	Integer width;
@@ -12,7 +12,7 @@ public class BasicBoard implements IBoard {
 	HashMap<Integer, ICase> cases;
 	
 	
-	public BasicBoard() {
+	public Board() {
 	}
 
 
@@ -79,24 +79,6 @@ public class BasicBoard implements IBoard {
 
 	@Override
 	public boolean isValidSwap(ICandy selectedCandy, ICandy swappedCandy) {
-		return false;
-	}
-
-
-	@Override
-	public boolean fill() {
-		return false;
-	}
-
-
-	@Override
-	public boolean horizontalAligned() {
-		return false;
-	}
-
-
-	@Override
-	public boolean verticalAligned() {
 		return false;
 	}
 }
