@@ -1,5 +1,9 @@
 package model;
 
+import java.awt.Graphics;
+
 public interface ICase {
-	boolean getActiv();
+
+	ICandy getCandy();
+	
 }

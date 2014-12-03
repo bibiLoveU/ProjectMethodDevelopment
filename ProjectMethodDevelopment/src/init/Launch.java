@@ -9,7 +9,7 @@ import java.awt.Panel;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import view.Welcome;
+import view.BoardPanel;
 import control.CandyCrushMain;
 
 public class Launch extends Panel {
@@ -20,8 +20,8 @@ public class Launch extends Panel {
 		CandyCrushMain cc = new CandyCrushMain();
 		cc.getB().fill();
 		
-		Welcome w = new Welcome();
-		w.drawGrid(cc.getB());
+		BoardPanel w = new BoardPanel();
+		//w.drawGrid(cc.getB());
 		
 		Frame frame = new Frame("Miam, des bonbons !");
         frame.addWindowListener(new WindowAdapter() {

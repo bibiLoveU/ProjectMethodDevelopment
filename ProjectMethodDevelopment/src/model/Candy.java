@@ -1,34 +1,21 @@
 package model;
 
-public class Candy implements ICandy{
-	IColor color;
-	Integer column;
-	Integer line;
-	
-	public Candy() {
+import java.awt.Color;
+
+public class Candy implements ICandy {
+
+	private Color color;
+
+	public Candy(Color c) {
+		color = c;
 	}
 
-	public IColor getColor() {
+	public Color getColor() {
 		return color;
 	}
 
-	public void setColor(IColor color) {
+	public void setColor(Color color) {
 		this.color = color;
 	}
 
-	public Integer getColumn() {
-		return column;
-	}
-
-	public void setColumn(Integer column) {
-		this.column = column;
-	}
-
-	public Integer getLine() {
-		return line;
-	}
-
-	public void setLine(Integer line) {
-		this.line = line;
-	}
 }

@@ -1,47 +1,57 @@
 package control;
 
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Mouse implements IDevice{
-	
-	public Mouse() {
-	}
+import view.BoardPanel;
+import model.IBoardStrategy;
 
-	@Override
-	public void mouseMoved(MouseEvent e, CandyCrushMain ccm) {
+public class Mouse extends MouseAdapter implements IDevice{
+	
+	private BoardPanel parent;
+	
+	
+	public Mouse( BoardPanel parent){
+		this.parent=parent;
+	}
+	
+	
+	public void mousePressed(MouseEvent e) { 
+       if(parent!=null){
+    	   parent.getBoard().setSelectedX( e.getX() / 32);
+    	   parent.getBoard().setSelectedX (e.getY() / 32);
+           parent.repaint();
+       }
+        
+    }
+    public void mouseMoved(MouseEvent e) { 
         // on bouge la souris : récupérer les coordonnées de la deuxième case
-        if(ccm.getB().getSelectedCandy() != null) {
-            //swappedX = e.getX() / 32;
-            //swappedY = e.getY() / 32;
+        if(parent.getBoard().getSelectedX() != -1 && parent.getBoard().getSelectedY() != -1) {
+        	parent.getBoard().setSwappedX ( e.getX() / 32);
+        	parent.getBoard().setSwappedY (e.getY() / 32);
             // si l'échange n'est pas valide, on cache la deuxième case
-            //if(!isValidSwap(selectedX, selectedY, swappedX, swappedY)) {
-            //    swappedX = swappedY = -1;
-            //}
-            if(!ccm.getB().isValidSwap(ccm.getB().getSelectedCandy(), ccm.getB().getSwappedCandy())) {
-            	ccm.getB().setSelectedCandy(null);
-            	ccm.getB().setSwappedCandy(null);
+            if(!parent.getBoard().isValidSwap(parent.getBoard().getSelectedX(), parent.getBoard().getSelectedY(), parent.getBoard().getSwappedX(), parent.getBoard().getSwappedY())) {
+            	parent.getBoard().setSwappedX(-1);
+            	parent.getBoard().setSwappedY(-1);
+            	// swappedX = swappedY = -1;
             }
         }
-        //repaint();
-	}
+        parent.repaint();
+    }
+//    public void mouseReleased(MouseEvent e) {
+//        // lorsque l'on relâche la souris il faut faire l'échange et cacher les cases
+//        if(selectedX != -1 && selectedY != -1 && swappedX != -1 && swappedY != -1) {
+//            swap(selectedX, selectedY, swappedX, swappedY);
+//        }
+//        selectedX = selectedY = swappedX = swappedY = -1;
+//        repaint();
+//    }
 
-	@Override
-	public void mousePressed(MouseEvent e, CandyCrushMain ccm) {
-        // on appuie sur le bouton de la souris : récupérer les coordonnées de la première case
-        //selectedX = e.getX() / 32;
-        //selectedY = e.getY() / 32;
-        //repaint();
-	}
+    // non implémentés
+    public void mouseClicked(MouseEvent e) { }
+    public void mouseEntered(MouseEvent e) { }
+    public void mouseExited(MouseEvent e) { }
+    public void mouseDragged(MouseEvent e) { mouseMoved(e); }
 
-	@Override
-	public void mouseReleased(MouseEvent e, CandyCrushMain ccm) {
-        // lorsque l'on relâche la souris il faut faire l'échange et cacher les cases
-        if(ccm.getB().getSelectedCandy() != null && ccm.getB().getSwappedCandy() != null) {
-        	ccm.getB().swap(ccm.getB().getSelectedCandy(), ccm.getB().getSwappedCandy());
-        }
-        //selectedX = selectedY = swappedX = swappedY = -1;
-        //repaint();
-        ccm.getB().setSelectedCandy(null);
-    	ccm.getB().setSwappedCandy(null);
-	}
+	
 }

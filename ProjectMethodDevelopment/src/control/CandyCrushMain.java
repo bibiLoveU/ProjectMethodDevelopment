@@ -24,8 +24,8 @@ public class CandyCrushMain {
 	
 	public CandyCrushMain() {
 		b = new Board();
-		b.setLength(8);
-		b.setWidth(8);
+//		b.setLength(8);
+//		b.setWidth(8);
 		b.fill();
 	}
 

@@ -1,0 +1,85 @@
+package view;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
+import javax.swing.JPanel;
+import model.IBoardStrategy;
+import control.Manager;
+
+public class BoardPanel extends JPanel implements Runnable{
+	
+
+	
+	private IBoardStrategy board;
+	
+	public BoardPanel(){
+		board=Manager.getInstance().getBorad();
+	}
+
+	 // boucle principale
+    public void run() {
+        while(true) {
+            try { Thread.currentThread().sleep(100); } catch(InterruptedException e) { }
+
+            repaint();
+        }
+    }
+    
+    public void update(Graphics g) {
+        paint(g);
+    }
+    
+
+    // routine d'affichage : on fait du double buffering
+    public void paint(Graphics g2) {
+        if(board.getBuffer() == null) board.setBuffer(createImage(800, 600))  ;
+        Graphics2D g = (Graphics2D) board.getBuffer().getGraphics();
+
+        // fond
+        g.setColor(Color.WHITE);
+        g.fillRect(0, 0, getWidth(), getHeight());
+
+        // afficher la grille vide
+        g.setColor(Color.BLACK);
+        for(int i = 0; i < 9; i++) {
+            g.drawLine(32 * i, 0, 32 * i, 8 * 32 + 1); 
+            g.drawLine(0, 32 * i, 8 * 32 + 1, 32 * i); 
+        }
+
+        // afficher la première case sélectionnée
+        if(board.getSelectedX() != -1 && board.getSelectedY() != -1) {
+            g.setColor(Color.ORANGE);
+            g.fillRect(board.getSelectedX() * 32 + 1, board.getSelectedY() * 32 + 1, 31, 31);
+        }
+
+        // afficher la deuxième case sélectionnée
+        if(board.getSwappedX() != -1 && board.getSwappedY() != -1) {
+            g.setColor(Color.YELLOW);
+            g.fillRect(board.getSwappedX() * 32 + 1, board.getSwappedY() * 32 + 1, 31, 31);
+        }
+
+        // afficher le contenu de la grille
+        for(int i = 0; i < 8; i++) {
+            for(int j = 0; j < 8; j++) {
+                g.setColor(board.getCases()[i][j].getCandy().getColor());
+                g.fillOval(32 * i + 3, 32 * j + 3, 27, 27);
+            }
+        }
+
+        // copier l'image à l'écran
+        g2.drawImage(board.getBuffer(), 0, 0, null);
+    }
+ // taille de la fenêtre
+    public Dimension getPreferredSize() {
+        return new Dimension(32 * 8 + 1, 32 * 8 + 1);
+    }
+
+
+	
+	public IBoardStrategy getBoard() {
+		return board;
+	}
+
+}
