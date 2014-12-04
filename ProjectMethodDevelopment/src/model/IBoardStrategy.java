@@ -16,7 +16,7 @@ public interface IBoardStrategy {
 //	public int getWidth();
 //	public void setWidth(int width);
 	public Image getBuffer();
-	int getSelectedX();
+	/*int getSelectedX();
 	int getSwappedX();
 	int getSwappedY();
 	int getSelectedY();
@@ -24,6 +24,6 @@ public interface IBoardStrategy {
 	void setBuffer(Image img);
 	void setSelectedX(int i);
 	void setSwappedX(int i);
-	void setSwappedY(int i);
+	void setSwappedY(int i);*/
 	
 }
