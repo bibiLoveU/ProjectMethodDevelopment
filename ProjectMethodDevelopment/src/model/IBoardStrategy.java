@@ -4,11 +4,12 @@ import java.awt.Image;
 
 public interface IBoardStrategy {
 	
-	void swap(ICandy selectedCandy, ICandy swappedCandy);
+	void swap(int x1, int y1, int x2, int y2) ;
 	boolean isValidSwap(int x1, int y1, int x2, int y2);
 	boolean fill();
-	boolean horizontalAligned();
-	boolean verticalAligned();
+	boolean horizontalAligned(int i, int j);
+	boolean verticalAligned(int i, int j);
+	public boolean removeAlignments();
 	
 //	public int getLength();
 //	public void setLength(int length);
@@ -24,4 +25,5 @@ public interface IBoardStrategy {
 	void setSelectedX(int i);
 	void setSwappedX(int i);
 	void setSwappedY(int i);
+	
 }

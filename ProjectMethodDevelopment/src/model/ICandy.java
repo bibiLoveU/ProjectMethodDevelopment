@@ -4,6 +4,8 @@ import java.awt.Color;
 
 public interface ICandy {
 
-	Color getColor();
+	int getColor();
+
+	boolean equals(Candy candy);
 
 }

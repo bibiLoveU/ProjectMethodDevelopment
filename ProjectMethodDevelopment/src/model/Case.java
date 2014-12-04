@@ -5,28 +5,24 @@ import java.awt.Color;
 public class Case implements ICase {
 	private Candy candy;
 
-	public Case() {
-		candy = null;
-	}
-
-	public Case(Color c) {
-		this.candy = new Candy(c);
+	public Case(int couleur) {
+		this.candy = new Candy(couleur);
 	}
 
 	public Candy getCandy() {
 		return candy;
 	}
 
-	public void setCandy(Color c) {
-		this.candy.setColor(c);
+	public void setCandy(int couleur) {
+		this.candy.setColor(couleur);
 	}
 
 	public boolean isEmpty() {
-		return candy == null;
+		return candy.getColor() == 0;
 	}
 
 	public void removeCandy() {
-		this.candy = null;
+		this.candy.setColor(0);
 	}
 
 }

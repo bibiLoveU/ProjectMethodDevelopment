@@ -19,7 +19,7 @@ public class Manager {
 			return m;
 	}
 	
-	public IBoardStrategy getBorad() {
+	public IBoardStrategy getBoard() {
 		return board;
 	}
 	

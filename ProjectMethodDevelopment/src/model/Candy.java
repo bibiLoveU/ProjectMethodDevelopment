@@ -4,18 +4,31 @@ import java.awt.Color;
 
 public class Candy implements ICandy {
 
-	private Color color;
+	private int color;
 
-	public Candy(Color c) {
-		color = c;
+	public Candy(int c) {
+	this.color=c;
 	}
 
-	public Color getColor() {
+
+	public int getColor() {
 		return color;
 	}
 
-	public void setColor(Color color) {
+
+
+
+	public void setColor(int color) {
 		this.color = color;
 	}
 
+
+
+
+	@Override
+	public boolean equals(Candy candy) {
+		return (this.color== candy.color);
+	}
+
+	
 }

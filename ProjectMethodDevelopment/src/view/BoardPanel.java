@@ -3,9 +3,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.MouseAdapter;
 
 import javax.swing.JPanel;
+
+import model.Board;
 import model.IBoardStrategy;
+import control.IDevice;
 import control.Manager;
 
 public class BoardPanel extends JPanel implements Runnable{
@@ -15,17 +19,26 @@ public class BoardPanel extends JPanel implements Runnable{
 	private IBoardStrategy board;
 	
 	public BoardPanel(){
-		board=Manager.getInstance().getBorad();
+		board=Manager.getInstance().getBoard();
+		while(board.fill());
+        // enlever les alignements existants
+        while(board.removeAlignments()) {
+        	board.fill();
+        }
 	}
 
-	 // boucle principale
-    public void run() {
-        while(true) {
-            try { Thread.currentThread().sleep(100); } catch(InterruptedException e) { }
+	 public void run() {
+	        while(true) {
+	            // un pas de simulation toutes les 100ms
+	            try { Thread.currentThread().sleep(100); } catch(InterruptedException e) { }
 
-            repaint();
-        }
-    }
+	            if(!board.fill()) {
+	            	board.removeAlignments();
+	            }
+
+	            repaint();
+	        }
+	    }
     
     public void update(Graphics g) {
         paint(g);
@@ -63,7 +76,7 @@ public class BoardPanel extends JPanel implements Runnable{
         // afficher le contenu de la grille
         for(int i = 0; i < 8; i++) {
             for(int j = 0; j < 8; j++) {
-                g.setColor(board.getCases()[i][j].getCandy().getColor());
+                g.setColor(Board.colors[board.getCases()[i][j].getCandy().getColor()]);
                 g.fillOval(32 * i + 3, 32 * j + 3, 27, 27);
             }
         }
