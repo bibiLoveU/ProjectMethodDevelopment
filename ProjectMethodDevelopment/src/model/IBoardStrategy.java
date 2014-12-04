@@ -28,7 +28,15 @@ public interface IBoardStrategy {
 //	int getSwappedX();
 //	int getSwappedY();
 //	int getSelectedY();
+	/*int getSelectedX();
+	int getSwappedX();
+	int getSwappedY();
+	int getSelectedY();
 	ICase[][] getCases();
 	void setBuffer(Image img);
+
+	void setSelectedX(int i);
+	void setSwappedX(int i);
+	void setSwappedY(int i);*/
 	
 }

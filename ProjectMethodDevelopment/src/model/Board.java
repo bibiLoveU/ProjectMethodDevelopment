@@ -11,6 +11,8 @@ public class Board implements IBoardStrategy {
 	private boolean[][] marked;
 	private Case selectedCase;
 	private Case swappedCase;
+	//private int selectedX, selectedY;
+	//private int swappedX, swappedY;
 	private Image buffer;
 	private int length;
 	private int width;
@@ -24,6 +26,10 @@ public class Board implements IBoardStrategy {
 		marked = new boolean[8][8];
 		selectedCase=new Case(0, -1, -1);
 		swappedCase=new Case(0, -1, -1);
+		//selectedX = -1;
+		//selectedY = -1;
+		//swappedX = -1;
+		//swappedY = -1;
 		initBoard();
 
 	}
@@ -70,6 +76,9 @@ public class Board implements IBoardStrategy {
 		System.out.println("je swap");
 		int x1= case1.getX(); int x2 = case2.getX(); int y1=case1.getY(); int y2 =case2.getY();
 		Case tmp = new Case(cases[x1][y1].getCandy().getColor(), x1, y1);
+	public void swap(int x1, int y1, int x2, int y2) {
+		System.out.println("je swap");
+		Case tmp = new Case(cases[x1][y1].getCandy().getColor());
 		cases[x1][y1].setCandy(cases[x2][y2].getCandy().getColor());
 		cases[x1][y1].setX(x2);
 		cases[x1][y1].setX(y2);
@@ -82,6 +91,9 @@ public class Board implements IBoardStrategy {
 		
 		int x1= case1.getX(); int x2 = case2.getX(); int y1=case1.getY(); int y2 =case2.getY();
 		if (x1 == -1 || x2== -1 || y1 == -1 || y2 == -1)
+	public boolean isValidSwap(int x1, int y1, int x2, int y2) {
+		System.out.println("le swap est valide ?");
+		if (x1 == -1 || x2 == -1 || y1 == -1 || y2 == -1)
 			return false;
 		if (Math.abs(x2 - x1) + Math.abs(y2 - y1) != 1)
 			return false;
@@ -104,6 +116,7 @@ public class Board implements IBoardStrategy {
 	}
 
 	public boolean fill() {
+		//System.out.println("je remplis");
 		Random rand = new Random();
 		boolean modified = false;
 		for (int i = 0; i < 8; i++) {
