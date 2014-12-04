@@ -3,11 +3,44 @@ package model;
 import java.awt.Color;
 
 public class Case implements ICase {
+	
 	private Candy candy;
+	private int x;
+	private int y;
+	
+	
 
-	public Case(int couleur) {
+	public Case(int couleur, int x, int y) {
 		this.candy = new Candy(couleur);
+		this.x=x;
+		this.y=y;
 	}
+	
+	
+
+	public int getX() {
+		return x;
+	}
+
+
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+
+
+	public int getY() {
+		return y;
+	}
+
+
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+
 
 	public Candy getCandy() {
 		return candy;

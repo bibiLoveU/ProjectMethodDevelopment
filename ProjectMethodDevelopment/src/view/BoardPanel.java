@@ -62,15 +62,15 @@ public class BoardPanel extends JPanel implements Runnable{
         }
 
         // afficher la première case sélectionnée
-        if(board.getSelectedX() != -1 && board.getSelectedY() != -1) {
+        if(board.getSelectedCase()!=null) {
             g.setColor(Color.ORANGE);
-            g.fillRect(board.getSelectedX() * 32 + 1, board.getSelectedY() * 32 + 1, 31, 31);
+            g.fillRect(board.getSelectedCase().getX() * 32 + 1, board.getSelectedCase().getY() * 32 + 1, 31, 31);
         }
 
         // afficher la deuxième case sélectionnée
-        if(board.getSwappedX() != -1 && board.getSwappedY() != -1) {
+        if(board.getSwappedCase()!=null) {
             g.setColor(Color.YELLOW);
-            g.fillRect(board.getSwappedX() * 32 + 1, board.getSwappedY() * 32 + 1, 31, 31);
+            g.fillRect(board.getSwappedCase().getX() * 32 + 1, board.getSwappedCase().getY() * 32 + 1, 31, 31);
         }
 
         // afficher le contenu de la grille

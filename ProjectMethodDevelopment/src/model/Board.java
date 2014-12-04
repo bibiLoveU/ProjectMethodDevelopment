@@ -9,8 +9,8 @@ public class Board implements IBoardStrategy {
 	private Case[][] cases;
 
 	private boolean[][] marked;
-	private int selectedX, selectedY;
-	private int swappedX, swappedY;
+	private Case selectedCase;
+	private Case swappedCase;
 	private Image buffer;
 	private int length;
 	private int width;
@@ -22,12 +22,30 @@ public class Board implements IBoardStrategy {
 		width = 8;
 		cases = new Case[8][8];
 		marked = new boolean[8][8];
-		selectedX = -1;
-		selectedY = -1;
-		swappedX = -1;
-		swappedY = -1;
+		selectedCase=new Case(0, -1, -1);
+		swappedCase=new Case(0, -1, -1);
 		initBoard();
 
+	}
+	
+	public Case getSelectedCase() {
+		return this.selectedCase;
+	}
+
+	public void setSelectedCase(int x, int y) {
+		this.selectedCase.setX(x) ;
+		this.selectedCase.setY(y) ;
+		//this.selectedCase.setCandy(selectedCase.getCandy().getColor());
+	}
+
+	public Case getSwappedCase() {
+		return this.swappedCase;
+	}
+
+	public void setSwappedCase(int x, int y) {
+		this.swappedCase.setX(x);
+		this.swappedCase.setY(y);
+		//this.swappedCase.setCandy(swappedCase.getCandy().getColor());
 	}
 
 	public Case[][] getCases() {
@@ -38,37 +56,6 @@ public class Board implements IBoardStrategy {
 		this.cases = cases;
 	}
 
-	public int getSelectedX() {
-		return selectedX;
-	}
-
-	public void setSelectedX(int selectedX) {
-		this.selectedX = selectedX;
-	}
-
-	public int getSelectedY() {
-		return selectedY;
-	}
-
-	public void setSelectedY(int selectedY) {
-		this.selectedY = selectedY;
-	}
-
-	public int getSwappedX() {
-		return swappedX;
-	}
-
-	public void setSwappedX(int swappedX) {
-		this.swappedX = swappedX;
-	}
-
-	public int getSwappedY() {
-		return swappedY;
-	}
-
-	public void setSwappedY(int swappedY) {
-		this.swappedY = swappedY;
-	}
 
 	public Image getBuffer() {
 		return buffer;
@@ -79,14 +66,22 @@ public class Board implements IBoardStrategy {
 	}
 
 
-	public void swap(int x1, int y1, int x2, int y2) {
-		Case tmp = new Case(cases[x1][y1].getCandy().getColor());
+	public void swap(ICase case1, ICase case2) {
+		System.out.println("je swap");
+		int x1= case1.getX(); int x2 = case2.getX(); int y1=case1.getY(); int y2 =case2.getY();
+		Case tmp = new Case(cases[x1][y1].getCandy().getColor(), x1, y1);
 		cases[x1][y1].setCandy(cases[x2][y2].getCandy().getColor());
+		cases[x1][y1].setX(x2);
+		cases[x1][y1].setX(y2);
 		cases[x2][y2].setCandy(tmp.getCandy().getColor());
+		cases[x2][y2].setX(tmp.getX());
+		cases[x2][y2].setX(tmp.getY());
 	}
 
-	public boolean isValidSwap(int x1, int y1, int x2, int y2) {
-		if (x1 == -1 || x2 == -1 || y1 == -1 || y2 == -1)
+	public boolean isValidSwap(ICase case1, ICase case2) {
+		
+		int x1= case1.getX(); int x2 = case2.getX(); int y1=case1.getY(); int y2 =case2.getY();
+		if (x1 == -1 || x2== -1 || y1 == -1 || y2 == -1)
 			return false;
 		if (Math.abs(x2 - x1) + Math.abs(y2 - y1) != 1)
 			return false;
@@ -94,7 +89,7 @@ public class Board implements IBoardStrategy {
 		if (cases[x1][y1].getCandy().equals(cases[x2][y2].getCandy()))
 			return false;
 
-		swap(x1, y1, x2, y2);
+		swap(case1, case2);
 
 		boolean newAlignment = false;
 		for (int i = 0; i < 3; i++) {
@@ -104,7 +99,7 @@ public class Board implements IBoardStrategy {
 			newAlignment |= verticalAligned(x2, y2 - i);
 		}
 
-		swap(x1, y1, x2, y2);
+		swap(case1, case2);
 		return newAlignment;
 	}
 
@@ -116,10 +111,10 @@ public class Board implements IBoardStrategy {
 				if (cases[i][j].isEmpty()) {
 					if (j == 0)
 						cases[i][j] = new Case(
-								1 + rand.nextInt(colors.length - 1));
+								1 + rand.nextInt(colors.length - 1), i, j);
 					else {
 						cases[i][j] = new Case(cases[i][j - 1].getCandy()
-								.getColor());
+								.getColor(), i, j);
 						cases[i][j - 1].removeCandy();
 					}
 					modified = true;
@@ -181,10 +176,12 @@ public class Board implements IBoardStrategy {
 		Random rand = new Random();
 		for (int i = 0; i < length; i++) {
 			for (int j = width - 1; j >= 0; j--) {
-				cases[i][j] = new Case(1 + rand.nextInt(colors.length - 1));
+				cases[i][j] = new Case(1 + rand.nextInt(colors.length - 1), i, j);
 			}
 		}
 
 	}
+
+	
 
 }
