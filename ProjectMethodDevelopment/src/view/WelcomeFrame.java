@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -12,18 +13,18 @@ import control.Mouse;
 
 public class WelcomeFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
-	private int hauteur;
-	private int largeur;
 	private BoardPanel boardPanel;
 	private MouseListener mouseListenner;
 
-	public WelcomeFrame() {
 
+	public Dimension getPreferredSize() {
+		return new Dimension(274, 295);
+	}
+
+	public WelcomeFrame() {
 		super("I love Candies !!");
 		System.out.println("Lancement de la partie...");
-		hauteur = 32 * 8 + 1;
-		largeur = 32 * 8 + 1;
-		this.setSize(hauteur, largeur);
+		setLocationRelativeTo(null);
 		boardPanel = new BoardPanel();
 		mouseListenner=new Mouse(boardPanel);
 		boardPanel.addMouseListener(mouseListenner);
@@ -37,5 +38,6 @@ public class WelcomeFrame extends JFrame {
 		});
 		this.pack();
 		this.repaint();
+
 	}
 }
