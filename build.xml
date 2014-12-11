@@ -3,8 +3,8 @@
 	<target name="test" >
 		<junit printsummary="yes" showoutput="true">
 		    <classpath>
-		        <pathelement location="ProjectMethodDevelopment/lib/junit-4.0.jar"/>
-		        <pathelement location="ProjectMethodDevelopment/lib/ant-junit4.jar"/>
+		        <pathelement location="./ProjectMethodDevelopment/lib/junit-4.10.jar"/>
+		        <pathelement location="./ProjectMethodDevelopment/lib/ant-junit4.jar"/>
 		    </classpath>
 		    <test name = "ProjectMethodDevelopment/src/test/TestModel.TestModelTrue" todir="."/>
 		</junit>
