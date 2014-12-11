@@ -4,9 +4,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-public class Model {
+public class TestModel {
     @Test
-    public void TestModel() {
+    public void TestModelTrue() {
         assertTrue(1 == 1);
     }
 }
