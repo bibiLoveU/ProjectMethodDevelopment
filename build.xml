@@ -6,7 +6,7 @@
 		        <pathelement location="ProjectMethodDevelopment/lib/junit-4.8.2.jar"/>
 		        <pathelement location="ProjectMethodDevelopment/lib/ant-junit4.jar"/>
 		    </classpath>
-		    <test name = "TestModel.TestModelTrue" todir="."/>
+		    <test name = "ProjectMethodDevelopment/src/test/TestModel.TestModelTrue" todir="."/>
 		</junit>
 	</target>
 </project>
