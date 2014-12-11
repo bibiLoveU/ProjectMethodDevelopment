@@ -56,7 +56,7 @@
             <classpath refid="ProjectMethodDevelopment.classpath"/>
         </java>
     </target>
-    <target name="test">
+    <target name="test" depends="model">
         <mkdir dir="${junit.output.dir}"/>
         <junit fork="yes" printsummary="withOutAndErr">
             <formatter type="xml"/>
