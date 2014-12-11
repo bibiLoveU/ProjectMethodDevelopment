@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project name = "ProjectMethodDevelopment" default="unittest" basedir = ".">
-	<target name="unittest" >
+	<target name="test" >
 		<junit printsummary="yes" showoutput="true">
 		    <classpath>
 		        <pathelement location="ProjectMethodDevelopment/lib/junit-4.8.2.jar"/>
