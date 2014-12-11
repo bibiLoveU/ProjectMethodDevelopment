@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="ProjectMethodDevelopment" default="main" basedir=".">
+<project name="ProjectMethodDevelopment" default="main" basedir="./ProjectMethodDevelopment/">
 	<property name="src.dir" location="src" />
 	<property name="build.dir" location="bin" />
 	<property name="test.dir" location="src" />
