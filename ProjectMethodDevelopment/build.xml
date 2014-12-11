@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- WARNING: Eclipse auto-generated file.
-              Any modifications will be overwritten.
-              To include a user specific buildfile here, simply create one in the same
-              directory with the processing instruction <?eclipse.ant.import?>
-              as the first entry and export the buildfile again. --><project basedir="." default="build" name="ProjectMethodDevelopment">
+<project basedir="." default="build" name="ProjectMethodDevelopment">
     <property environment="env"/>
-    <property name="ECLIPSE_HOME" value="/usr/local/eclipse-ee-luna/"/>
+    <property name="ECLIPSE_HOME" value="../../../../../../../usr/local/eclipse-ee-luna/"/>
     <property name="junit.output.dir" value="junit"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.7"/>
@@ -23,6 +19,7 @@
         <mkdir dir="bin"/>
         <copy includeemptydirs="false" todir="bin">
             <fileset dir="src">
+                <exclude name="**/*.launch"/>
                 <exclude name="**/*.java"/>
             </fileset>
         </copy>
@@ -41,6 +38,19 @@
         </javac>
     </target>
     <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
     <target name="StartGame">
         <java classname="init.StartGame" failonerror="true" fork="yes">
             <classpath refid="ProjectMethodDevelopment.classpath"/>
@@ -57,6 +67,7 @@
         <mkdir dir="${junit.output.dir}"/>
         <junit fork="yes" printsummary="withOutAndErr">
             <formatter type="xml"/>
+            <test name="test.TestModel" todir="${junit.output.dir}"/>
             <classpath refid="ProjectMethodDevelopment.classpath"/>
         </junit>
     </target>
@@ -65,6 +76,14 @@
         <junit fork="yes" printsummary="withOutAndErr">
             <formatter type="xml"/>
             <test name="test.model" todir="${junit.output.dir}"/>
+            <classpath refid="ProjectMethodDevelopment.classpath"/>
+        </junit>
+    </target>
+    <target name="Model.TestModel">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="test.TestModel" todir="${junit.output.dir}"/>
             <classpath refid="ProjectMethodDevelopment.classpath"/>
         </junit>
     </target>
@@ -77,3 +96,4 @@
         </junitreport>
     </target>
 </project>
+
