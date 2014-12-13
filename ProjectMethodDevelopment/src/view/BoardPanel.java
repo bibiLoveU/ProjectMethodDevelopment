@@ -7,8 +7,8 @@ import java.awt.event.MouseAdapter;
 
 import javax.swing.JPanel;
 
-import model.Board;
-import model.IBoardStrategy;
+import model.SimpleBoard;
+import model.IStrategy;
 import control.IDevice;
 import control.Manager;
 
@@ -16,7 +16,7 @@ public class BoardPanel extends JPanel implements Runnable{
 	
 
 	
-	private IBoardStrategy board;
+	private IStrategy board;
 	
 	public BoardPanel(){
 		board=Manager.getInstance().getBoard();
@@ -76,7 +76,7 @@ public class BoardPanel extends JPanel implements Runnable{
         // afficher le contenu de la grille
         for(int i = 0; i < 8; i++) {
             for(int j = 0; j < 8; j++) {
-                g.setColor(Board.colors[board.getCases()[i][j].getCandy().getColor()]);
+                g.setColor(SimpleBoard.colors[board.getCases()[i][j].getCandy().getColor()]);
                 g.fillOval(32 * i + 3, 32 * j + 3, 27, 27);
             }
         }
@@ -91,7 +91,7 @@ public class BoardPanel extends JPanel implements Runnable{
 
 
 	
-	public IBoardStrategy getBoard() {
+	public IStrategy getBoard() {
 		return board;
 	}
 

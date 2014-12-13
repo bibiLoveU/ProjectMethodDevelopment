@@ -1,6 +1,6 @@
 package model;
 
-public enum EnumTypeCase {
+public enum EnumCase {
 	SIMPLE_CASE,
 	GELATINE_CASE;
 

@@ -2,7 +2,7 @@ package model;
 
 import java.awt.Image;
 
-public interface IBoardStrategy {
+public interface IStrategy {
 	
 	void swap(ICase case1, ICase case2) ;
 	boolean isValidSwap(ICase case1, ICase case2);

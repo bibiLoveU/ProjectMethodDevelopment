@@ -6,7 +6,7 @@ import java.util.Random;
 
 import exception.ExceptionCreation;
 
-public class Board implements IBoardStrategy {
+public class SimpleBoard implements IStrategy {
 
 	private Case[][] cases;
 
@@ -17,16 +17,16 @@ public class Board implements IBoardStrategy {
 	private int length;
 	private int width;
 	public static final Color[] colors = { Color.WHITE, Color.RED, Color.GREEN,
-			Color.BLUE, Color.GRAY, Color.PINK, Color.CYAN };
+			Color.BLUE, Color.GRAY, Color.MAGENTA, Color.ORANGE };
 
-	public Board() {
+	public SimpleBoard() {
 		length = 8;
 		width = 8;
 		cases = new Case[8][8];
 		marked = new boolean[8][8];
 		try {
-			selectedCase = CaseFactory.getCase(EnumTypeCase.SIMPLE_CASE);
-			swappedCase = CaseFactory.getCase(EnumTypeCase.SIMPLE_CASE);
+			selectedCase = CaseFactory.getCase(EnumCase.SIMPLE_CASE);
+			swappedCase = CaseFactory.getCase(EnumCase.SIMPLE_CASE);
 		} catch (ExceptionCreation e) {
 			e.toString();
 		}
@@ -75,7 +75,7 @@ public class Board implements IBoardStrategy {
 		int x2 = case2.getX();
 		int y1 = case1.getY();
 		int y2 = case2.getY();
-		Case tmp = new Case(cases[x1][y1].getCandy().getColor(), x1, y1);
+		ICase tmp = new Case(cases[x1][y1].getCandy().getColor(), x1, y1);
 		cases[x1][y1].setCandy(cases[x2][y2].getCandy().getColor());
 		cases[x1][y1].setX(x2);
 		cases[x1][y1].setX(y2);

@@ -6,9 +6,9 @@ import exception.ExceptionCreation;
 
 public class CaseFactory {
 	
-	public static ICase getCase(EnumTypeCase type) throws ExceptionCreation{
+	public static ICase getCase(EnumCase type) throws ExceptionCreation{
 		ICase c;
-		if(type.equals(EnumTypeCase.SIMPLE_CASE)){
+		if(type.equals(EnumCase.SIMPLE_CASE)){
 			c= new Case();
 		}else{
 			throw new ExceptionCreation(type.toString());

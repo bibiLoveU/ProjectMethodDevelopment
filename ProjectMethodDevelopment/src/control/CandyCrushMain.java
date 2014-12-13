@@ -13,12 +13,12 @@ import view.IGameMode;
 import view.ITerminal;
 import view.IWindows;
 import view.WelcomeFrame;
-import model.Board;
-import model.IBoardStrategy;
+import model.SimpleBoard;
+import model.IStrategy;
 import model.IPlay;
 
 public class CandyCrushMain {
-	private IBoardStrategy b;
+	private IStrategy b;
 	private Integer countdown;
 	private IDevice gameListener;
 	private IGameMode gameMode;
@@ -35,7 +35,7 @@ public class CandyCrushMain {
 
 
 	public CandyCrushMain() {
-		b = new Board();
+		b = new SimpleBoard();
 		frames = new ArrayList<Frame>();
 		frames.add(new AcceuilFrame());
 		frames.add(new WelcomeFrame());
@@ -52,12 +52,12 @@ public class CandyCrushMain {
 	}
 
 
-	public IBoardStrategy getB() {
+	public IStrategy getB() {
 		return b;
 	}
 
 
-	public void setB(IBoardStrategy b) {
+	public void setB(IStrategy b) {
 		this.b = b;
 	}
 

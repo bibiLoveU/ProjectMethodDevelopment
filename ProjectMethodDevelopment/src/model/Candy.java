@@ -5,9 +5,8 @@ public class Candy implements ICandy {
 	private int color;
 
 	public Candy(int c) {
-	this.color=c;
+		this.color = c;
 	}
-
 
 	public int getColor() {
 		return color;
@@ -21,5 +20,4 @@ public class Candy implements ICandy {
 		return (this.color == candy.color);
 	}
 
-	
 }
