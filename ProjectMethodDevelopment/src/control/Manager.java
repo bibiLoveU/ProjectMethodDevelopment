@@ -5,7 +5,7 @@ import model.IBoardStrategy;
 
 public class Manager {
 
-	private static Manager m;
+	private static Manager instance;
 	private IBoardStrategy board;
 	
 	private Manager(){
@@ -13,10 +13,10 @@ public class Manager {
 	}
 
 	public static Manager getInstance(){
-		if(m==null)
+		if(instance==null)
 			return new Manager();
 		else 
-			return m;
+			return instance;
 	}
 	
 	public IBoardStrategy getBoard() {

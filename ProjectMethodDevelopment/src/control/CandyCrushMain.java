@@ -29,6 +29,7 @@ public class CandyCrushMain {
 	private Integer x;
 	private Integer y;
 	private List<Frame> frames;
+	
 
 	private static CandyCrushMain instance = null;
 

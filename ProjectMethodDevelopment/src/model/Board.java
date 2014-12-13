@@ -4,48 +4,53 @@ import java.awt.Color;
 import java.awt.Image;
 import java.util.Random;
 
+import exception.ExceptionCreation;
+
 public class Board implements IBoardStrategy {
 
 	private Case[][] cases;
 
 	private boolean[][] marked;
-	private Case selectedCase;
-	private Case swappedCase;
+	private ICase selectedCase;
+	private ICase swappedCase;
 	private Image buffer;
 	private int length;
 	private int width;
 	public static final Color[] colors = { Color.WHITE, Color.RED, Color.GREEN,
-			Color.BLUE, Color.GRAY, Color.PINK, Color.CYAN };;
+			Color.BLUE, Color.GRAY, Color.PINK, Color.CYAN };
 
 	public Board() {
 		length = 8;
 		width = 8;
 		cases = new Case[8][8];
 		marked = new boolean[8][8];
-		selectedCase=new Case(0, -1, -1);
-		swappedCase=new Case(0, -1, -1);
+		try {
+			selectedCase = CaseFactory.getCase(EnumTypeCase.SIMPLE_CASE);
+			swappedCase = CaseFactory.getCase(EnumTypeCase.SIMPLE_CASE);
+		} catch (ExceptionCreation e) {
+			e.toString();
+		}
+		
 		initBoard();
 
 	}
-	
-	public Case getSelectedCase() {
+
+	public ICase getSelectedCase() {
 		return this.selectedCase;
 	}
 
 	public void setSelectedCase(int x, int y) {
-		this.selectedCase.setX(x) ;
-		this.selectedCase.setY(y) ;
-		//this.selectedCase.setCandy(selectedCase.getCandy().getColor());
+		this.selectedCase.setX(x);
+		this.selectedCase.setY(y);
 	}
 
-	public Case getSwappedCase() {
+	public ICase getSwappedCase() {
 		return this.swappedCase;
 	}
 
 	public void setSwappedCase(int x, int y) {
 		this.swappedCase.setX(x);
 		this.swappedCase.setY(y);
-		//this.swappedCase.setCandy(swappedCase.getCandy().getColor());
 	}
 
 	public Case[][] getCases() {
@@ -56,7 +61,6 @@ public class Board implements IBoardStrategy {
 		this.cases = cases;
 	}
 
-
 	public Image getBuffer() {
 		return buffer;
 	}
@@ -65,10 +69,12 @@ public class Board implements IBoardStrategy {
 		this.buffer = buffer;
 	}
 
-
 	public void swap(ICase case1, ICase case2) {
 		System.out.println("je swap");
-		int x1= case1.getX(); int x2 = case2.getX(); int y1=case1.getY(); int y2 =case2.getY();
+		int x1 = case1.getX();
+		int x2 = case2.getX();
+		int y1 = case1.getY();
+		int y2 = case2.getY();
 		Case tmp = new Case(cases[x1][y1].getCandy().getColor(), x1, y1);
 		cases[x1][y1].setCandy(cases[x2][y2].getCandy().getColor());
 		cases[x1][y1].setX(x2);
@@ -79,9 +85,12 @@ public class Board implements IBoardStrategy {
 	}
 
 	public boolean isValidSwap(ICase case1, ICase case2) {
-		
-		int x1= case1.getX(); int x2 = case2.getX(); int y1=case1.getY(); int y2 =case2.getY();
-		if (x1 == -1 || x2== -1 || y1 == -1 || y2 == -1)
+
+		int x1 = case1.getX();
+		int x2 = case2.getX();
+		int y1 = case1.getY();
+		int y2 = case2.getY();
+		if (x1 == -1 || x2 == -1 || y1 == -1 || y2 == -1)
 			return false;
 		if (Math.abs(x2 - x1) + Math.abs(y2 - y1) != 1)
 			return false;
@@ -125,7 +134,6 @@ public class Board implements IBoardStrategy {
 	}
 
 	public boolean removeAlignments() {
-		// passe 1 : marquer tous les alignements
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				if (!cases[i][j].isEmpty() && horizontalAligned(i, j)) {
@@ -150,8 +158,7 @@ public class Board implements IBoardStrategy {
 		return modified;
 	}
 
-	// if(grid[i][j] == grid[i + 1][j] && grid[i][j] == grid[i + 2][j]) return
-	// true;
+	
 	public boolean horizontalAligned(int i, int j) {
 		if (i < 0 || j < 0 || i >= 6 || j >= 8)
 			return false;
@@ -161,8 +168,7 @@ public class Board implements IBoardStrategy {
 		return false;
 	}
 
-	// if(grid[i][j] == grid[i][j + 1] && grid[i][j] == grid[i][j + 2]) return
-	// true;
+	
 	public boolean verticalAligned(int i, int j) {
 		if (i < 0 || j < 0 || i >= 8 || j >= 6)
 			return false;
@@ -176,12 +182,11 @@ public class Board implements IBoardStrategy {
 		Random rand = new Random();
 		for (int i = 0; i < length; i++) {
 			for (int j = width - 1; j >= 0; j--) {
-				cases[i][j] = new Case(1 + rand.nextInt(colors.length - 1), i, j);
+				cases[i][j] = new Case(1 + rand.nextInt(colors.length - 1), i,
+						j);
 			}
 		}
 
 	}
-
-	
 
 }

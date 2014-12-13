@@ -1,23 +1,21 @@
 package model;
 
+import exception.ExceptionCreation;
 
 
-public class CaseFactory implements ICaseFactory{
+
+public class CaseFactory {
+	
+	public static ICase getCase(EnumTypeCase type) throws ExceptionCreation{
+		ICase c;
+		if(type.equals(EnumTypeCase.SIMPLE_CASE)){
+			c= new Case();
+		}else{
+			throw new ExceptionCreation(type.toString());
+		}
+		return c;
+	}
+	
 	
 }
 	
-	
-//	public CaseFactory() {}
-//	
-//	public List<Case> createSingleCase(int n, String mode){
-//		List<Case> result = new List<Case>();
-//		if(mode.equals("random")){
-//			for(int i = 0; i < n; i++)
-//				result.add(new Case());
-//		}else{
-//			for(int i = 0; i < n; i++)
-//				result.add(new Case());
-//		}
-//		return result;
-//	}
-

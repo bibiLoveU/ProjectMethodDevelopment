@@ -1,7 +1,5 @@
 package model;
 
-import java.awt.Color;
-
 public class Candy implements ICandy {
 
 	private int color;
@@ -15,19 +13,12 @@ public class Candy implements ICandy {
 		return color;
 	}
 
-
-
-
 	public void setColor(int color) {
 		this.color = color;
 	}
 
-
-
-
-	@Override
 	public boolean equals(Candy candy) {
-		return (this.color== candy.color);
+		return (this.color == candy.color);
 	}
 
 	

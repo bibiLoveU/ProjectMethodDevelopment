@@ -10,24 +10,11 @@ public interface IBoardStrategy {
 	boolean horizontalAligned(int i, int j);
 	boolean verticalAligned(int i, int j);
 	public boolean removeAlignments();
-	
-	public Case getSelectedCase();
-
+	public ICase getSelectedCase();
 	public void setSelectedCase(int x, int y) ;
-
-	public Case getSwappedCase() ;
-
+	public ICase getSwappedCase() ;
 	public void setSwappedCase(int x, int y);
-	
-//	public int getLength();
-//	public void setLength(int length);
-//	public int getWidth();
-//	public void setWidth(int width);
 	public Image getBuffer();
-//	int getSelectedX();
-//	int getSwappedX();
-//	int getSwappedY();
-//	int getSelectedY();
 	ICase[][] getCases();
 	void setBuffer(Image img);
 	
