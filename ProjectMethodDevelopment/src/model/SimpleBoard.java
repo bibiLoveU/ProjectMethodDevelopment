@@ -70,7 +70,7 @@ public class SimpleBoard implements IStrategy {
 	}
 
 	public void swap(ICase case1, ICase case2) {
-		System.out.println("je swap");
+		//System.out.println("je swap");
 		int x1 = case1.getX();
 		int x2 = case2.getX();
 		int y1 = case1.getY();
